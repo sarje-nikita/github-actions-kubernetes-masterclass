@@ -1,7 +1,7 @@
 -- SkillPulse Database Schema
 
-CREATE DATABASE IF NOT EXISTS skillpulse;
-USE skillpulse;
+-- Use the database created by MYSQL_DATABASE env var (skillpulse_db)
+USE skillpulse_db;
 
 CREATE TABLE IF NOT EXISTS skills (
     id INT AUTO_INCREMENT PRIMARY KEY,
