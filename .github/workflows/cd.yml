@@ -23,15 +23,22 @@ jobs:
             cd ~/github-actions-kubernetes-masterclass
             git pull origin main
             # Create .env file from GitHub Secrets
-            cat > .env << EOF
-DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
-DOCKERHUB_PASSWORD=${{ secrets.DOCKERHUB_PASSWORD }}
-MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
-MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}
-MYSQL_USER=${{ secrets.MYSQL_USER }}
-MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
+            cat > .env << 'EOF'
+DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME
+DOCKERHUB_PASSWORD=$DOCKERHUB_PASSWORD
+MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
+MYSQL_DATABASE=$MYSQL_DATABASE
+MYSQL_USER=$MYSQL_USER
+MYSQL_PASSWORD=$MYSQL_PASSWORD
 EOF
             docker compose pull
             docker compose up -d
             docker image prune -f
+        env:
+          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+          MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
+          MYSQL_USER: ${{ secrets.MYSQL_USER }}
+          MYSQL_PASSWORD: ${{ secrets.MYSQL_PASSWORD }}
 
