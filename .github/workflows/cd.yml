@@ -31,9 +31,9 @@ jobs:
             echo "DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME" > .env
             echo "DOCKERHUB_PASSWORD=$DOCKERHUB_PASSWORD" >> .env
             echo "MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD" >> .env
-            echo "MYSQL_DATABASE=$DB_NAME" >> .env
-            echo "MYSQL_USER=$DB_USER" >> .env
-            echo "MYSQL_PASSWORD=$DB_PASSWORD" >> .env
+            echo "DB_NAME=$DB_NAME" >> .env
+            echo "DB_USER=$DB_USER" >> .env
+            echo "DB_PASSWORD=$DB_PASSWORD" >> .env
             echo "Docker images before pull:"
             docker images
             echo "Pulling Docker images..."
