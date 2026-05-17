@@ -22,10 +22,15 @@ jobs:
             fi
             cd ~/github-actions-kubernetes-masterclass
             git pull origin main
-            if [ ! -f .env ]; then
-              echo "ERROR: ~/github-actions-kubernetes-masterclass/.env is missing. Create it once with DOCKERHUB_USERNAME and DB credentials."
-              exit 1
-            fi
+            # Create .env file from GitHub Secrets
+            cat > .env << EOF
+DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
+DOCKERHUB_PASSWORD=${{ secrets.DOCKERHUB_PASSWORD }}
+MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}
+MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}
+MYSQL_USER=${{ secrets.MYSQL_USER }}
+MYSQL_PASSWORD=${{ secrets.MYSQL_PASSWORD }}
+EOF
             docker compose pull
             docker compose up -d
             docker image prune -f
